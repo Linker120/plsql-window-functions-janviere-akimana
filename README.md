@@ -30,41 +30,27 @@ The analysis will provide a clear view of top-selling products by region, identi
 ##  Success Criteria
 This project implements **five measurable goals** using window functions:
 
-1. Top 5 Products per Region/Quarter → RANK() 🥇
-Meaning: Ranking within groups. This function assigns a numerical rank (1, 2, 3...) to rows based on a value (like sales), but the ranking restarts every time a new group begins (like a new region or a new quarter). 
-2. **Running monthly sales totals** → `SUM() OVER()`
-   It seems you're asking for the meaning of these SQL Window Functions in plain language, based on the common analysis task they solve.
-
-Here is the simple meaning of each:
-
-1. Top 5 Products per Region/Quarter → RANK() 🥇
+1. Top 5 Products per Region/Quarter → RANK()
+   
 Meaning: Ranking within groups. This function assigns a numerical rank (1, 2, 3...) to rows based on a value (like sales), but the ranking restarts every time a new group begins (like a new region or a new quarter).
 
 Simple Analogy: It's like finding out who placed 1st, 2nd, and 3rd in each individual race at a track meet, not in the whole competition.
 
-2. Running Monthly Sales Totals → SUM() OVER() 📈
-Meaning: A growing total. This calculates a cumulative sum where the total for any given month includes the sales from that month plus the total from all previous months.
- 
-3. **Month-over-month growth (%)** → `LAG()` / `LEAD()`
-   It seems you're asking for the meaning of these SQL Window Functions in plain language, based on the common analysis task they solve.
-
-Here is the simple meaning of each:
-
-1. Top 5 Products per Region/Quarter → RANK() 🥇
-Meaning: Ranking within groups. This function assigns a numerical rank (1, 2, 3...) to rows based on a value (like sales), but the ranking restarts every time a new group begins (like a new region or a new quarter).
-
-Simple Analogy: It's like finding out who placed 1st, 2nd, and 3rd in each individual race at a track meet, not in the whole competition.
-
-2. Running Monthly Sales Totals → SUM() OVER() 📈
+2. Running Monthly Sales Totals → SUM() OVER()
+   
 Meaning: A growing total. This calculates a cumulative sum where the total for any given month includes the sales from that month plus the total from all previous months. The window of data being added up just keeps getting bigger.
 
 Simple Analogy: It's keeping a running balance in your checking account. The current balance is the sum of every transaction since the account opened.
 
-3. Month-over-Month Growth (%) → LAG() / LEAD() 🔙
+3. Month-over-Month Growth (%) → LAG() / LEAD()
+   
 Meaning: Looking backward or forward. These functions let you look at the data from a previous row (LAG()) or a next row (LEAD()) without doing a complex join. This is essential for comparing the current period's value (like sales) to the last period's value to calculate growth. 
 4. **Customer quartiles (segmentation)** → `NTILE(4)`
-   Meaning: Splitting data into equal buckets. This function divides all your rows (like customers) into a specified number of equally-sized groups or "tiles" based on some ordered metric (like how much they spend). NTILE(4) specifically creates four quartiles (Top 25%, next 25%, etc.). 
-5. **3-month moving averages** → `AVG() OVER()`  
+   
+   Meaning: Splitting data into equal buckets. This function divides all your rows (like customers) into a specified number of equally-sized groups or "tiles" based on some ordered metric (like how much they spend). NTILE(4) specifically creates four quartiles (Top 25%, next 25%, etc.).
+   
+5. **3-month moving averages** → `AVG() OVER()`
+     
 Meaning: Smoothing out the data. This calculates an average, but instead of using all the data, it uses a small, defined, sliding window of rows. A 3-month moving average calculates the average sales for the current month plus the two previous months.
 ---
 
