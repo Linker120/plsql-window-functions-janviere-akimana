@@ -1,13 +1,11 @@
-Name: Akimana Janviere
-
-Student ID: 26769
-
-Group: B
-
-Lecturer: Mr. Maniraguha Eric
-
 
 #  PL/SQL Window Functions – Coffee Distribution Analysis
+
+Name: Akimana Janviere
+Student ID: 26769
+Group: B
+Lecturer: Mr. Maniraguha Eric
+
 
 ##  Project Overview
 This project demonstrates the use of **PL/SQL window functions** to analyze sales and customer behavior for a coffee distribution company operating across regions (Kigali, Bugesera, Musanze). The analysis supports **marketing strategies** and **inventory planning** by identifying sales trends, top-performing products, and customer segments.
