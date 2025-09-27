@@ -155,4 +155,4 @@ NTILE(4) divides customers into 4 revenue-based groups (quartiles). CUME_DIST() 
 All sources were properly cited. Implementations and analysis represent original work. No AI-generated content was copied without attribution or adaptation.
 
 Thank you for visiting my repository
-
+---
