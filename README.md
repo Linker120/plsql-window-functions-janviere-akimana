@@ -56,7 +56,7 @@ Meaning: Smoothing out the data. This calculates an average, but instead of usin
 
 ---
 
-STEP3--.##  Database Schema
+STEP3.##  Database Schema
 
 ### Customers Table and their modal
 --
@@ -87,7 +87,7 @@ ER Diagram
 
 ---
 
-STEP4.--##  Window Functions Implementation
+STEP4.##  Window Functions Implementation
 
 ### 1. Ranking – Top Products per Region
 This query calculates the total revenue per customer and applies different ranking functions. RANK() assigns positions but leaves gaps if ties exist, DENSE_RANK() avoids gaps, ROW_NUMBER() gives unique sequential numbers, and PERCENT_RANK() shows percentile ranking.
