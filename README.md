@@ -42,136 +42,46 @@ This project implements **five measurable goals** using window functions:
 ![table transactions](https://github.com/user-attachments/assets/1011fe24-8946-4235-bea0-95c3570e07c7)
 ![ER Diagram transactions](https://github.com/user-attachments/assets/17979610-6ba0-433d-8cce-6a8f7435288b)
 
-
+This schema tracks transactions involving animal-related products and customers. It includes three main tables:
+CUSTOMERS: Stores customer details like ID, name, and region.
+PRODUCTS: Contains product information including ID, name, and price.
+TRANSACTIONS: Records each transaction with fields for transaction ID, customer ID, product ID, date, and amount.
+ Relationships:
+- Each transaction links to one customer and one product using foreign keys.
 
 ---
 
 ## ⚙️ Window Functions Implementation
 
 ### 1. Ranking – Top Products per Region
-```sql
-SELECT c.region,
-       p.name AS product_name,
-       SUM(t.amount) AS total_sales,
-       RANK() OVER (PARTITION BY c.region ORDER BY SUM(t.amount) DESC) AS product_rank
-FROM transactions t
-JOIN customers c ON c.customer_id = t.customer_id
-JOIN products p ON p.product_id = t.product_id
-GROUP BY c.region, p.name
-ORDER BY c.region, product_rank;
-```
+This query calculates the total revenue per customer and applies different ranking functions. RANK() assigns positions but leaves gaps if ties exist, DENSE_RANK() avoids gaps, ROW_NUMBER() gives unique sequential numbers, and PERCENT_RANK() shows percentile ranking.
 
-**Expected Output:**
-| Region   | Product Name    | Total Sales | Product Rank |
-|----------|-----------------|-------------|--------------|
-| Bugesera | Instant Coffee  | 20,000      | 1 |
-| Bugesera | Coffee Capsules | 30,000      | 1 |
-| Bugesera | Ground Coffee   | 15,000      | 3 |
-| Kigali   | Coffee Beans    | 55,000      | 1 |
-| Kigali   | Ground Coffee   | 95,000      | 2 |
-| Kigali   | Instant Coffee  | 55,000      | 3 |
-| Musanze  | Ground Coffee   | 40,000      | 1 |
-| Musanze  | Coffee Capsules | 30,000      | 2 |
-| Musanze  | Coffee Beans    | 25,000      | 3 |
-
-📸 *Screenshot: `/screenshots/ranking.png`*
+![ranking](https://github.com/user-attachments/assets/bae2c737-6b90-495b-a771-ece3aae30088)
 
 ---
 
 ### 2. Aggregate – Running Monthly Sales Totals
-```sql
-SELECT TO_CHAR(sale_date, 'YYYY-MM') AS sales_month,
-       SUM(amount) AS monthly_sales,
-       SUM(SUM(amount)) OVER (ORDER BY TO_CHAR(sale_date,'YYYY-MM') ROWS UNBOUNDED PRECEDING) AS cumulative_sales
-FROM transactions
-GROUP BY TO_CHAR(sale_date,'YYYY-MM')
-ORDER BY sales_month;
-```
+SUM() OVER (...) gives a running total of sales per customer across time. AVG() OVER (...) with a frame calculates a 3-row moving average, useful for smoothing trends.
 
-**Expected Output:**
-| Sales Month | Monthly Sales | Cumulative Sales |
-|-------------|---------------|------------------|
-| 2024-01     | 115,000       | 115,000 |
-| 2024-02     | 110,000       | 225,000 |
-| 2024-03     | 165,000       | 390,000 |
+![aggregate](https://github.com/user-attachments/assets/e7324d50-4147-446c-97c8-1f6aff35e4a6)
 
-📸 *Screenshot: `/screenshots/aggregate.png`*
 
 ---
 
 ### 3. Navigation – Month-over-Month Growth
-```sql
-SELECT sales_month,
-       monthly_sales,
-       LAG(monthly_sales,1) OVER (ORDER BY sales_month) AS prev_month_sales,
-       ROUND(
-         (monthly_sales - LAG(monthly_sales,1) OVER (ORDER BY sales_month)) /
-         NULLIF(LAG(monthly_sales,1) OVER (ORDER BY sales_month),0) * 100,2
-       ) AS growth_pct
-FROM (
-    SELECT TO_CHAR(sale_date,'YYYY-MM') AS sales_month,
-           SUM(amount) AS monthly_sales
-    FROM transactions
-    GROUP BY TO_CHAR(sale_date,'YYYY-MM')
-)
-ORDER BY sales_month;
-```
-
-**Expected Output:**
-| Sales Month | Monthly Sales | Prev Month Sales | Growth % |
-|-------------|---------------|------------------|----------|
-| 2024-01     | 115,000       | NULL             | NULL     |
-| 2024-02     | 110,000       | 115,000          | -4.35%   |
-| 2024-03     | 165,000       | 110,000          | 50.00%   |
-
-📸 *Screenshot: `/screenshots/navigation.png`*
+LAG() looks at the previous month’s sales, and LEAD() looks at the next month’s sales. This allows you to compare a customer’s sales from one month to another 
+![navigate](https://github.com/user-attachments/assets/51244523-5dbf-41f8-8310-cbeefb3abe5f)
 
 ---
 
 ### 4. Distribution – Customer Quartiles
-```sql
-SELECT c.name AS customer_name,
-       SUM(t.amount) AS total_spent,
-       NTILE(4) OVER (ORDER BY SUM(t.amount) DESC) AS quartile
-FROM transactions t
-JOIN customers c ON c.customer_id = t.customer_id
-GROUP BY c.name;
-```
-
-**Expected Output:**
-| Customer Name     | Total Spent | Quartile |
-|-------------------|-------------|----------|
-| Janviere Akimana  | 105,000     | 1 |
-| Holy Isezerano    | 100,000     | 2 |
-| Maxyme Abakunzi   | 95,000      | 3 |
-| Miracle Ihirwe    | 65,000      | 4 |
-
-📸 *Screenshot: `/screenshots/distribution.png`*
+NTILE(4) divides customers into 4 revenue-based groups (quartiles). CUME_DIST() shows the cumulative distribution position of each customer in the revenue ranking.
+![distribution](https://github.com/user-attachments/assets/98b076d4-3635-44a3-a3ba-12edf8db56a3)
 
 ---
 
 ### 5. Moving Average – 3-Month Sales Trend
-```sql
-SELECT sales_month,
-       monthly_sales,
-       ROUND(AVG(monthly_sales) OVER (ORDER BY sales_month ROWS BETWEEN 2 PRECEDING AND CURRENT ROW),2) AS moving_avg_3m
-FROM (
-    SELECT TO_CHAR(sale_date,'YYYY-MM') AS sales_month,
-           SUM(amount) AS monthly_sales
-    FROM transactions
-    GROUP BY TO_CHAR(sale_date,'YYYY-MM')
-)
-ORDER BY sales_month;
-```
-
-**Expected Output:**
-| Sales Month | Monthly Sales | 3-Month Moving Avg |
-|-------------|---------------|--------------------|
-| 2024-01     | 115,000       | 115,000 |
-| 2024-02     | 110,000       | 112,500 |
-| 2024-03     | 165,000       | 130,000 |
-
-📸 *Screenshot: `/screenshots/moving_avg.png`*
+![moving averages](https://github.com/user-attachments/assets/7da74740-7174-42df-802d-ccb204bb3a22)
 
 ---
 
@@ -222,3 +132,5 @@ plsql-window-functions-janviere/
 
 ## ✅ Integrity Statement
 All sources were properly cited. Implementations and analysis represent original work. No AI-generated content was copied without attribution or adaptation.
+
+THANK YOU FOR VISITING MY REPOSITORY
