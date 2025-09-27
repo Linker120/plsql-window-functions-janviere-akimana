@@ -1,9 +1,12 @@
 
 #  PL/SQL Window Functions – Coffee Distribution Analysis
 
-Name: Akimana Janviere
+Names: Akimana Janviere
+
 Student ID: 26769
+
 Group: B
+
 Lecturer: Mr. Maniraguha Eric
 
 
