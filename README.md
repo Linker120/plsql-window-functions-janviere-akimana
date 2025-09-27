@@ -53,6 +53,7 @@ Meaning: Splitting data into equal buckets. This function divides all your rows 
 5. **3-month moving averages** → `AVG() OVER()`
      
 Meaning: Smoothing out the data. This calculates an average, but instead of using all the data, it uses a small, defined, sliding window of rows. A 3-month moving average calculates the average sales for the current month plus the two previous months.
+
 ---
 
 STEP3.##  Database Schema
