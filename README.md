@@ -55,6 +55,10 @@ Meaning: Splitting data into equal buckets. This function divides all your rows 
 Meaning: Smoothing out the data. This calculates an average, but instead of using all the data, it uses a small, defined, sliding window of rows. A 3-month moving average calculates the average sales for the current month plus the two previous months.
 
 ---
+how to create user
+---
+fist of all hire are the codes of how to create user and how to grant privileges in order to perform my assignment very easy.
+![create user](https://github.com/user-attachments/assets/6c33dcd4-2565-4258-b54b-3e9ba015355c)
 
 STEP3.##  Database Schema
 
