@@ -75,6 +75,10 @@ PRODUCTS: Contains product information including ID, name, and price.
 TRANSACTIONS: Records each transaction with fields for transaction ID, customer ID, product ID, date, and amount.
  Relationships:
 - Each transaction links to one customer and one product using foreign keys.
+  
+ER Diagram 
+<img width="1419" height="347" alt="image" src="https://github.com/user-attachments/assets/e4740cfc-5301-46d0-a495-cac8f41f9887" />
+
 
 ---
 
