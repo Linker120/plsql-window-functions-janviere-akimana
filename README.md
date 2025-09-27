@@ -31,29 +31,18 @@ This project implements **five measurable goals** using window functions:
 ## 🗄 Database Schema
 
 ### Customers Table
-| Column      | Type         | Key |
-|-------------|--------------|-----|
-| customer_id | INT          | PK  |
-| name        | VARCHAR(50)  |     |
-| region      | VARCHAR(50)  |     |
+![table customers](https://github.com/user-attachments/assets/fe09baa1-fb73-4500-824e-7acbc41ed72e)
+![ER Diagram customers](https://github.com/user-attachments/assets/c4545338-266b-411d-968c-1cacc111e71b)
 
 ### Products Table
-| Column      | Type         | Key |
-|-------------|--------------|-----|
-| product_id  | INT          | PK  |
-| name        | VARCHAR(50)  |     |
-| category    | VARCHAR(50)  |     |
+![table products](https://github.com/user-attachments/assets/2dffa251-8758-4c2f-a87a-f08e037f9d2c)
+![ER Diagram product](https://github.com/user-attachments/assets/9c0d235a-ec10-4e81-b2ff-1916ab748eb6)
 
 ### Transactions Table
-| Column        | Type        | Key |
-|---------------|-------------|-----|
-| transaction_id| INT         | PK  |
-| customer_id   | INT         | FK  |
-| product_id    | INT         | FK  |
-| sale_date     | DATE        |     |
-| amount        | DECIMAL     |     |
+![table transactions](https://github.com/user-attachments/assets/1011fe24-8946-4235-bea0-95c3570e07c7)
+![ER Diagram transactions](https://github.com/user-attachments/assets/17979610-6ba0-433d-8cce-6a8f7435288b)
 
-📌 *ER diagram included in `/diagrams/ERD.png`*
+
 
 ---
 
