@@ -45,9 +45,10 @@ Simple Analogy: It's keeping a running balance in your checking account. The cur
 3. Month-over-Month Growth (%) → LAG() / LEAD()
    
 Meaning: Looking backward or forward. These functions let you look at the data from a previous row (LAG()) or a next row (LEAD()) without doing a complex join. This is essential for comparing the current period's value (like sales) to the last period's value to calculate growth. 
+
 4. **Customer quartiles (segmentation)** → `NTILE(4)`
    
-   Meaning: Splitting data into equal buckets. This function divides all your rows (like customers) into a specified number of equally-sized groups or "tiles" based on some ordered metric (like how much they spend). NTILE(4) specifically creates four quartiles (Top 25%, next 25%, etc.).
+Meaning: Splitting data into equal buckets. This function divides all your rows (like customers) into a specified number of equally-sized groups or "tiles" based on some ordered metric (like how much they spend). NTILE(4) specifically creates four quartiles (Top 25%, next 25%, etc.).
    
 5. **3-month moving averages** → `AVG() OVER()`
      
@@ -148,5 +149,5 @@ NTILE(4) divides customers into 4 revenue-based groups (quartiles). CUME_DIST() 
 ## ✅ Integrity Statement
 All sources were properly cited. Implementations and analysis represent original work. No AI-generated content was copied without attribution or adaptation.
 
-Thank you for visiting my repository
+###Thank you for visiting my repository
 
