@@ -10,7 +10,7 @@ Group: B
 Lecturer: Mr. Maniraguha Eric
 
 
-##  Project Overview
+STEP1.##  Project Overview
 This project demonstrates the use of **PL/SQL window functions** to analyze sales and customer behavior for a coffee distribution company operating across regions (Kigali, Bugesera, Musanze). The analysis supports **marketing strategies** and **inventory planning** by identifying sales trends, top-performing products, and customer segments.
 
 ---
@@ -27,7 +27,7 @@ The analysis will provide a clear view of top-selling products by region, identi
 
 ---
 
-##  Success Criteria
+STEP2.##  Success Criteria
 This project implements **five measurable goals** using window functions:
 
 1. Top 5 Products per Region/Quarter → RANK()
@@ -54,7 +54,7 @@ Meaning: Looking backward or forward. These functions let you look at the data f
 Meaning: Smoothing out the data. This calculates an average, but instead of using all the data, it uses a small, defined, sliding window of rows. A 3-month moving average calculates the average sales for the current month plus the two previous months.
 ---
 
-##  Database Schema
+STEP3.##  Database Schema
 
 ### Customers Table
 ![table customers](https://github.com/user-attachments/assets/fe09baa1-fb73-4500-824e-7acbc41ed72e)
@@ -77,7 +77,7 @@ TRANSACTIONS: Records each transaction with fields for transaction ID, customer 
 
 ---
 
-##  Window Functions Implementation
+STEP4.##  Window Functions Implementation
 
 ### 1. Ranking – Top Products per Region
 This query calculates the total revenue per customer and applies different ranking functions. RANK() assigns positions but leaves gaps if ties exist, DENSE_RANK() avoids gaps, ROW_NUMBER() gives unique sequential numbers, and PERCENT_RANK() shows percentile ranking.
