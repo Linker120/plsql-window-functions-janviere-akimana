@@ -133,4 +133,5 @@ plsql-window-functions-janviere/
 ## ✅ Integrity Statement
 All sources were properly cited. Implementations and analysis represent original work. No AI-generated content was copied without attribution or adaptation.
 
-THANK YOU FOR VISITING MY REPOSITORY
+Thank you for visiting my repository
+
