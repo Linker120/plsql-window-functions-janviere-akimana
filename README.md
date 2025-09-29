@@ -120,11 +120,6 @@ NTILE(4) divides customers into 4 revenue-based groups (quartiles). CUME_DIST() 
 
 ---
 
-### 5. Moving Average – 3-Month Sales Trend
-![moving averages](https://github.com/user-attachments/assets/7da74740-7174-42df-802d-ccb204bb3a22)
-
----
-
 ##  Results Analysis
 
 **Descriptive (What happened?)**  
